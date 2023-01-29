@@ -3,6 +3,7 @@ body {
 }
 .link {
 	text-decoration: none;
+	display: block;
 }
 .list {
 	list-style: none;
@@ -48,7 +49,8 @@ img {
 }
 /* HEADER */
 .header {
-	background-color: grey;
+	position: absolute;
+	width: 100%;
 
 	padding-top: 32px;
 	padding-bottom: 32px;
@@ -92,12 +94,6 @@ img {
 	color: #FFFFFF;
 }
 .btn.primary {
-	font-family: inherit;
-	font-weight: 600;
-	font-size: 12px;
-	line-height: 1.33;
-	letter-spacing: 0.09em;
-	text-transform: uppercase;
 	color: #FFFFFF;
 }
 .btn {
@@ -105,11 +101,21 @@ img {
 	height: 40px;
 	border: 1px solid #FF6C00;
 	border-radius: 25px;
+	font-family: inherit;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 1.33;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
 	padding: 12px 20px;
+	cursor: pointer;
 	background-color: transparent;
+	transition: background-color 200ms linear, color 200ms linear;
 }
-
-.btn:hover {
+.btn-header {
+	margin-right: 17px;
+}
+.btn:is(:hover, :focus) {
 	background-color: #FF6C00;
 }
 /* HERO */
@@ -136,9 +142,24 @@ img {
 	padding: 252px 100px 208px;
 }
 .hero-list {
-	width: 100px;
+	display: flex;
+	transform: rotate(-90deg) translateY(100%);
+	transform-origin: bottom left;
+	align-items: center;
+	gap: 40px;
 }
-.hero-item {
+.hero-soc {
+	width: 100px;
+	display: flex;
+	align-items: flex-end;
+	padding-left: 27px;
+	padding-bottom: 40px;
+}
+.hero-list::before {
+	content: '';
+	width: 60px;
+	height: 1px;
+	background-color: currentColor;
 }
 .hero-link {
 	font-weight: 600;
@@ -146,6 +167,7 @@ img {
 	line-height: 1.36;
 	letter-spacing: 0.2em;
 	color: #303030;
+	transition: color 200ms linear;
 }
 .hero-link:is(:hover, :focus) {
 	color: #FF6C00;
@@ -327,6 +349,7 @@ img {
 .number-why {
 	display: block;
 	margin-bottom: 6px;
+	position: relative;
 
 	font-weight: 700;
 	font-size: 42px;
@@ -337,6 +360,8 @@ img {
 }
 .number-why::after {
 	content: '+';
+	position: absolute;
+	top: 7px;
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 1.375;
@@ -355,6 +380,39 @@ img {
 	height: 133px;
 	background-color: #F7F7F7;
 	padding: 20px 24px;
+	transition: background-color 500ms linear, transform 500ms ease-in-out 500ms;
+	 animation: animate75 3000ms infinite 1000ms;
+}
+.item-why:hover {
+  animation-name: changeBgColor;
+  animation-duration: 3000ms;
+  animation-iteration-count: infinite;
+}
+@keyframes animate75 {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.75);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes changeBgColor {
+  0% {
+    background-color: teal;
+  }
+
+  50% {
+    background-color: orange;
+  }
+
+  100% {
+    background-color: deepskyblue;
+  }
 }
 .item-why:nth-child(odd) {
 	margin-right: 30px;
@@ -453,12 +511,10 @@ img {
 	align-items: center;
 	justify-content: center;
 
-	transition: box-shadow 300ms linear, transorm 300 ms linear;
+	transition: background-color 300ms linear,
+	fill 200ms linear;
 }
-.soc-link:hover {
-	transform: translate(10px, 10px);
-	box-shadow: unset;
-}
+
 .soc-link:is(:hover, :focus) {
 	background-color: #FF6C00;
 	fill: #FFFFFF;
@@ -482,6 +538,9 @@ img {
 }
 .work-item {
 	width: calc((100% - 90px)/ 4);
+}
+.work-item:hover {
+	box-shadow: 9px 8px 9px rgba(226, 123, 5, 0.1);
 }
 /* ONLINE-BOOKING */
 .contacts-wrap {
